@@ -1,29 +1,27 @@
 package HibernateCrudUsers.controller;
 
 import HibernateCrudUsers.model.User;
+import HibernateCrudUsers.service.UserService;
+import HibernateCrudUsers.service.UserServiceImp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
-    private static User user;
-    static {
-        user = new User();
-        user.setId(1);
-        user.setName("Вася");
-        user.setAge(11);
-        user.setEmail("вася@мыло.ру");
-    }
+    private UserService userService = new UserServiceImp();
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allUsers() {
+        List<User> users = userService.allUsers();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("users");
-        modelAndView.addObject("user",user);
+        modelAndView.addObject("usersList", users);
         return modelAndView;
     }
 
