@@ -12,6 +12,7 @@
 </head>
 <body>
 This is "users" page
+${user}
 <h2><a href="/edit">edit page</a></h2>
 </body>
 </html>
